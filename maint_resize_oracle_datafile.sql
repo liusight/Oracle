@@ -1,0 +1,1 @@
+alter database datafile '+DATA_DG/IMGDB/DATAFILE/report_index_01.ora' resize 33554432000;

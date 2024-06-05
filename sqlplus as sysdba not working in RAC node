@@ -1,0 +1,132 @@
+
+
+[oracle@oracleserver ~]$ sqlplus / as sysdba
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Wed Jun 5 10:29:42 2024
+Version 19.17.0.0.0
+
+Copyright (c) 1982, 2022, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SQL> exit
+############################################it connects to an idle instance of the RAC node
+
+
+[oracle@oracleserver ~]$ sqlplus sys@orcl as sysdba
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Wed Jun 5 10:30:23 2024
+Version 19.17.0.0.0
+
+Copyright (c) 1982, 2022, Oracle.  All rights reserved.
+
+Enter password:
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.17.0.0.0
+
+SQL> 
+
+########################################Above shows that it works when the SID/Service name is specified
+
+
+[oracle@oracleserver ~]$ rman target /
+
+Recovery Manager: Release 19.0.0.0.0 - Production on Wed Jun 5 10:31:49 2024
+Version 19.17.0.0.0
+
+Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+
+connected to target database (not started)
+
+RMAN> exit
+
+##############################  rman target / is also not working unless you specify the SID/ Service name
+
+
+
+#############################Solution Below
+
+############################ENsure the /etc/oratab file is defined using the instance name and not the database service\sid name
+
+
+[oracle@oracleserver ~]$ cat /etc/oratab
+#
+
+
+
+# This file is used by ORACLE utilities.  It is created by root.sh
+# and updated by either Database Configuration Assistant while creating
+# a database or ASM Configuration Assistant while creating ASM instance.
+
+# A colon, ':', is used as the field terminator.  A new line terminates
+# the entry.  Lines beginning with a pound sign, '#', are comments.
+#
+# Entries are of the form:
+#   $ORACLE_SID:$ORACLE_HOME:<N|Y>:
+#
+# The first and second fields are the system identifier and home
+# directory of the database respectively.  The third field indicates
+# to the dbstart utility that the database should , "Y", or should not,
+# "N", be brought up at system boot time.
+#
+# Multiple entries with the same $ORACLE_SID are not allowed.
+#
+orcl:/ora01/oracle/db/19.3.0/db_home:Y
++ASM1:/ora01/app/grid/product/19.3.0/grid:Y
+
+
+
+################### SOLUTION
+
+vi /etc/oratab
+
+#############################chaneg it to orcl1     for RAC node 1 and orcl2 for RAC node 2 ...nth. See below
+
+
+orcl1:/ora01/oracle/db/19.3.0/db_home:Y
+
+
+
+####################################### Then you will be able to do sqlplus / as sysdba      or rman target / and it should then work
+
+
+
+
+
+[oracle@oracleserver ~]$ sqlplus / as sysdba
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Wed Jun 5 10:45:36 2024
+Version 19.17.0.0.0
+
+Copyright (c) 1982, 2022, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.17.0.0.0
+
+SQL> exit
+Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.17.0.0.0
+[oracle@oracleserver ~]$ rman target /
+
+Recovery Manager: Release 19.0.0.0.0 - Production on Wed Jun 5 10:46:04 2024
+Version 19.17.0.0.0
+
+Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+
+connected to target database: TST1 (DBID=1279061112)
+
+RMAN> exit
+
+
+
+
+
+
+
+
+
+

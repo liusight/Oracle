@@ -1,0 +1,70 @@
+1. General Environment Overview
+	• What version of Oracle is being used?
+		○ It's crucial to know the specific Oracle version (e.g., Oracle 19c, Oracle 21c) to ensure compatibility with tools and queries.
+	• Is the environment a single instance or a multi-node setup (e.g., Oracle RAC)?
+		○ Understanding whether Oracle Real Application Clusters (RAC) is in use can affect your approach to high availability, backups, and troubleshooting.
+	• Are there any specific customizations made to the Oracle environment?
+		○ Customizations could include tweaks to initialization parameters, tablespaces, or specific configurations based on business needs.
+2. Database Architecture and Configuration
+	• How is the database architecture set up (e.g., standalone, multi-tenant, Data Guard, etc.)?
+		○ Understanding the architecture will help you grasp the overall design, replication, and failover strategies.
+	• What are the configured tablespaces and their usage?
+		○ Knowing which tablespaces exist and what data they store (e.g., SYSTEM, USERS, TEMP) will help you manage storage and space allocation.
+	• What is the storage configuration (e.g., disk, ASM, NFS)?
+		○ This informs you about the physical layer of storage, including Oracle Automatic Storage Management (ASM) or traditional file systems.
+	• What are the database parameters for memory management (e.g., SGA, PGA)?
+		○ These parameters help determine how memory is allocated for database operations.
+3. Backup and Recovery
+	• What is the backup strategy in place?
+		○ Is there a regular RMAN (Recovery Manager) backup schedule, or are other tools used? It's important to understand the backup windows, types (full/incremental), and retention policies.
+	• How is disaster recovery handled?
+		○ Are there Data Guard configurations, backup data centers, or remote replication in place? Understanding how recovery is planned will ensure you're prepared for any failure scenario.
+	• Are there any existing backup scripts or automation tools in use?
+		○ It’s critical to learn if backup processes are automated (e.g., with cron jobs or Oracle Enterprise Manager).
+	• Where are the backup files stored?
+		○ Knowing where backups are located (on-site, off-site, or in the cloud) is necessary for disaster recovery planning.
+4. Security and Access Management
+	• What are the security requirements (e.g., encryption, access control)?
+		○ Are there encryption policies for data at rest or in transit? Is the environment using Oracle Advanced Security or Transparent Data Encryption (TDE)?
+	• Who has administrative privileges, and how is access controlled?
+		○ It's important to know which users have DBA privileges (e.g., SYS, SYSTEM) and whether there are any role-based access controls in place.
+	• Are auditing and monitoring enabled for database activity?
+		○ Understanding what auditing is configured (e.g., Oracle Audit Vault, custom auditing scripts) will help you ensure compliance and traceability.
+	• Are there any specific password or account lockout policies?
+		○ Many organizations require specific password rules, like length and complexity, as well as account lockout after several failed login attempts.
+5. Performance Monitoring and Tuning
+	• What performance monitoring tools are in use?
+		○ Are Oracle Enterprise Manager (OEM), AWR (Automatic Workload Repository), or third-party tools like Nagios or SolarWinds in place?
+	• What are the key performance metrics to monitor (e.g., wait events, CPU usage, disk I/O)?
+		○ Understanding which metrics are critical for performance (e.g., response time, CPU utilization, disk I/O) will guide proactive database tuning.
+	• Is there an established process for identifying and resolving performance bottlenecks?
+		○ Are there any standard procedures for running diagnostic queries or utilizing AWR reports to pinpoint issues?
+6. Patching and Upgrades
+	• What is the patching schedule for the Oracle database?
+		○ Knowing the frequency and process for applying patches (e.g., quarterly CPU patches, emergency patches) will ensure you're prepared for maintenance activities.
+	• Are there any pending patches or updates required?
+		○ Understanding which patches are critical for system security or performance and ensuring they're applied in a timely manner is crucial for maintaining system health.
+	• What is the policy for major database upgrades?
+		○ How often are major upgrades done (e.g., moving to a new Oracle release)? Is there a testing environment for upgrades and patches before applying them to production?
+7. Database Monitoring and Alerts
+	• What types of alerts and notifications are configured?
+		○ Is there an alert system in place for critical issues like space usage, long-running queries, or failed backups? Knowing this helps ensure you're aware of potential problems early.
+	• How are logs managed (e.g., alert logs, listener logs, audit logs)?
+		○ Understanding the logging configuration helps in troubleshooting and maintaining logs for future analysis.
+8. Application and Database Interaction
+	• Which applications are connected to the Oracle database?
+		○ Knowing which business-critical applications rely on the database helps prioritize issues and understand load patterns.
+	• How is data replication or synchronization handled between databases (if applicable)?
+		○ If there are any Oracle GoldenGate or Data Guard configurations for replication, this needs to be understood for managing data consistency and failover scenarios.
+9. Database Maintenance and Automation
+	• Are there any automated database maintenance tasks (e.g., statistics gathering, index rebuilding)?
+		○ It’s important to understand what maintenance activities run automatically to keep the database optimized and healthy.
+	• Is there a routine schedule for database health checks and optimization?
+		○ Regular health checks help prevent issues from escalating. It’s essential to know the schedule for tasks like table partitioning or space reclamation.
+10. Documentation and Knowledge Transfer
+	• Is there any existing documentation for the database environment?
+		○ Having access to existing documentation will help you understand the database configuration, backup procedures, and security policies more quickly.
+	• Who are the key stakeholders or team members responsible for the database?
+		○ Building a relationship with developers, sysadmins, or architects is essential for effective collaboration.
+	• Are there any existing standard operating procedures (SOPs) or knowledge base articles?
+SOPs help to standardize procedures and reduce errors, especially during high-pressure situations like recovery from failure.
